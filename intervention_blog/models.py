@@ -1,6 +1,8 @@
 from uuid import uuid4
+from typing import Iterable
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.base import ModelBase
 
 # Create your models here.
 
@@ -14,10 +16,12 @@ class Tag(models.Model):
 
 class UserProfile(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    email = models.EmailField(default="")
+    password = models.CharField(max_length=15, default="")
+    user = models.OneToOneField(User, on_delete=models.CASCADE, default="")
     is_author = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now=True, editable=False)
-
+    
     def __str__(self):
         return self.user.username
 
