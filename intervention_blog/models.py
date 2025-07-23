@@ -16,8 +16,6 @@ class Tag(models.Model):
 
 class UserProfile(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
-    email = models.EmailField(default="")
-    password = models.CharField(max_length=15, default="")
     user = models.OneToOneField(User, on_delete=models.CASCADE, default="")
     is_author = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now=True, editable=False)
