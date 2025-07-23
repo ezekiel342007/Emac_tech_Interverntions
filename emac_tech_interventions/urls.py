@@ -27,4 +27,5 @@ urlpatterns = [
     path("api/v1/", include("intervention_blog.urls")),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    # {"refresh":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1MjU4NzczMSwiaWF0IjoxNzUyNTAxMzMxLCJqdGkiOiI5NTI1OTg3NTBkOTY0MzQyOWMxZGY0N2Y2NGEyYmY4NiIsInVzZXJfaWQiOjN9.L4SlqsyPcYDiGF4Si6pdOs094zaLWOHJ1Fa5nWDTZtQ","access":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUyNTAxNjMxLCJpYXQiOjE3NTI1MDEzMzEsImp0aSI6ImFjYTE0ZmU5Y2I0ZjQ3Y2JhMWQ3MmYwYjA3NWQ2ZmM3IiwidXNlcl9pZCI6M30.R4ewF2O8cTQAeoGHZ6cdsXFh2OoO071IlvD-TdpZvnk"}
 ]
