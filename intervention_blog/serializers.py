@@ -26,8 +26,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             password=validated_data["password"]
         )
         
-        UserProfile.objects.create(user=user)
-        return super().create(validated_data)
+        return user
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
@@ -41,7 +40,6 @@ class UserProfileSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         instance.is_author = validated_data.get("is_author", instance.is_author)
         instance.save()
-
         return instance
 
 

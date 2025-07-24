@@ -1,11 +1,13 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics 
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.response import Response
+from rest_framework.status import HTTP_201_CREATED
 from rest_framework_simplejwt import authentication
 
 from intervention_blog.filters import BlogFilter
 
-from .serializers import BlogSerializer, UserProfileSerializer
+from .serializers import BlogSerializer, UserRegistrationSerializer
 from .models import Blog, UserProfile
 
 # Create your views here.
@@ -27,6 +29,19 @@ class SingleBlog(generics.RetrieveUpdateDestroyAPIView):
     authentication_classes = [authentication.JWTAuthentication]
 
 
-class Users(generics.ListCreateAPIView):
+class Users(generics.CreateAPIView):
     queryset = UserProfile.objects.all()
-    serializer_class = UserProfileSerializer
+    serializer_class = UserRegistrationSerializer
+
+    def create(self, request):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        headers = self.get_success_headers(serializer.data)
+        return Response(
+            {"message": "Account Registerd Successfully"},
+            headers=headers,
+            status=HTTP_201_CREATED
+        )
+
+
