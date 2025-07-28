@@ -14,7 +14,7 @@ class Tag(models.Model):
 
 class UserProfile(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
-    user = models.OneToOneField(User, on_delete=models.CASCADE, default="")
+    user = models.OneToOneField(User, on_delete=models.CASCADE, default="", related_name="profile")
     is_author = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now=True, editable=False)
     
@@ -25,8 +25,8 @@ class UserProfile(models.Model):
 class Blog(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     title = models.CharField(max_length=200)
-    description = models.TextField(max_length=300, blank=True)
-    tags = models.ManyToManyField(Tag, blank=True, related_name="blogs_with_tag")
+    description = models.TextField(max_length=300, blank=True, null=True)
+    tags = models.ManyToManyField(Tag, related_name="blogs_with_tag")
     image_url = models.URLField(blank=True, null=True)
     body = models.TextField()
     author = models.ForeignKey(UserProfile, null=True, on_delete=models.SET_NULL, related_name="blogs")
