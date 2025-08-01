@@ -21,6 +21,11 @@ class Blogs(generics.ListCreateAPIView):
     authentication_classes = [authentication.JWTAuthentication]
 
 
+class TrendingBlog(generics.ListAPIView):
+    queryset = Blog.objects.all().order_by("-likes")
+    serializer_class = BlogSerializer
+
+
 class LatestBlog(generics.ListAPIView):
     queryset = Blog.objects.all().order_by("-posted_on")[0:4]
     serializer_class = BlogSerializer
@@ -48,10 +53,3 @@ class Users(generics.CreateAPIView):
             headers=headers,
             status=HTTP_201_CREATED
         )
-# {
-#     "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1Mzc4NjEyMywiaWF0IjoxNzUzNjk5NzIzLCJqdGkiOiI1NGZiMjBjZDVjZTg0MWRmOWU1MmNkN2U4NDdkNjE1ZSIsInVzZXJfaWQiOjZ9.TvF2M298IVLgxDiKjxI804iBViVz-8y4E8hJVZTb3nY",
-#     "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUzNzAwMDIzLCJpYXQiOjE3NTM2OTk3MjMsImp0aSI6Ijc3OGE2MmU5YWQzYjQ4MjA4MjE2ZTg1NDYwODk5N2I0IiwidXNlcl9pZCI6Nn0.7R9qO3Ms1PN0K1y6NTqGTiIAWJ49o5U5p2FK-atRTyI"
-# }
-
-# 957db919-d515-4cc2-934d-70535655a9f8
-# fae03bb2-40bc-4e5b-b4f3-d05548cb5531

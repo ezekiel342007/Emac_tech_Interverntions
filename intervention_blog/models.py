@@ -30,8 +30,8 @@ class Blog(models.Model):
     image_url = models.URLField(blank=True, null=True)
     body = models.TextField()
     author = models.ForeignKey(UserProfile, null=True, on_delete=models.SET_NULL, related_name="blogs")
-    likes = models.PositiveIntegerField(null=True, blank=True)
-    dislikes = models.PositiveIntegerField(null=True, blank=True)
+    likes = models.PositiveIntegerField(null=True, blank=True, default=0)
+    dislikes = models.PositiveIntegerField(null=True, blank=True, default=0)
     posted_on = models.DateTimeField(auto_now=True, editable=False)
     updated_on = models.DateTimeField(auto_now_add=True, editable=False)
 
