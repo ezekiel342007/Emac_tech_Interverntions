@@ -1,5 +1,6 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics 
+from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 from rest_framework.status import HTTP_201_CREATED
@@ -19,6 +20,7 @@ class Blogs(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
     filter_backends = (DjangoFilterBackend,)
     authentication_classes = [authentication.JWTAuthentication]
+    pagination_class = LimitOffsetPagination
 
 
 class TrendingBlog(generics.ListAPIView):
