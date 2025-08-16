@@ -26,11 +26,13 @@ class Blogs(generics.ListCreateAPIView):
 class TrendingBlog(generics.ListAPIView):
     queryset = Blog.objects.all().order_by("-likes")
     serializer_class = BlogSerializer
+    pagination_class = LimitOffsetPagination
 
 
 class LatestBlog(generics.ListAPIView):
     queryset = Blog.objects.all().order_by("-posted_on")[0:4]
     serializer_class = BlogSerializer
+    pagination_class = LimitOffsetPagination
 
 
 class SingleBlog(generics.RetrieveUpdateDestroyAPIView):
