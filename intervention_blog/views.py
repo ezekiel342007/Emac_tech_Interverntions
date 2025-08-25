@@ -11,10 +11,15 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 
 from intervention_blog.filters import BlogFilter
 
-from .serializers import BlogSerializer, UserProfileSerializer, UserRegistrationSerializer
-from .models import Blog, UserProfile
+from .serializers import BlogSerializer, UserProfileSerializer, UserRegistrationSerializer, TagSerializer
+from .models import Blog, Tag, UserProfile
 
 # Create your views here.
+
+class GetAllTags(generics.ListAPIView):
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
+
 
 class Blogs(generics.ListCreateAPIView):
     queryset = Blog.objects.all()
