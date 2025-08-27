@@ -8,6 +8,6 @@ urlpatterns = [
     path("blogs/trending/", view=views.TrendingBlog.as_view()),
     path("blogs/<str:pk>/", view=views.SingleBlog.as_view()),
     path("register/", view=views.Users.as_view()),
-    path("users/<str:pk>/", view=views.Users.as_view()),
     path("users/current_user/", view=views.CurrentUser.as_view()),
+    path("users/<str:user_id>/", view=views.SingleUser.as_view()),
 ]

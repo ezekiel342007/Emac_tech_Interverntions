@@ -1,6 +1,8 @@
 from datetime import datetime, timedelta, timezone
+from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import generics 
+from rest_framework import mixins, status
 from rest_framework.request import Request 
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
@@ -8,10 +10,11 @@ from rest_framework.response import Response
 from rest_framework.status import HTTP_201_CREATED
 from rest_framework_simplejwt import authentication
 from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework import generics
 
 from intervention_blog.filters import BlogFilter
 
-from .serializers import BlogSerializer, UserProfileSerializer, UserRegistrationSerializer, TagSerializer
+from .serializers import BlogSerializer, UserProfileSerializer, UserRegistrationSerializer, TagSerializer, UserSerializer
 from .models import Blog, Tag, UserProfile
 
 # Create your views here.
@@ -66,13 +69,23 @@ class Users(generics.CreateAPIView):
             status=HTTP_201_CREATED
         )
 
-
 class CurrentUser(generics.RetrieveAPIView):
     serializer_class = UserProfileSerializer
     permission_classes = [IsAuthenticated]
+    authentication_classes = [authentication.JWTAuthentication]
 
     def get_object(self):
         return self.request.user
+
+
+class SingleUser(generics.RetrieveAPIView):
+    queryset = UserProfile.objects.all()
+    serializer_class = UserProfileSerializer
+
+    def get_object(self):
+        user_id = self.kwargs.get("user_id")
+        return get_object_or_404(UserProfile, user__id=user_id)
+
 
 
 class CookieTokenObtainPairView(TokenObtainPairView):
@@ -94,5 +107,3 @@ class CookieTokenObtainPairView(TokenObtainPairView):
             response.data.pop("refresh")
 
         return response
-
-
