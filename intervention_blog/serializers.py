@@ -1,5 +1,5 @@
-from django.contrib.auth.models import User
 from rest_framework import serializers
+from django.contrib.auth.models import User
 
 from .models import Blog, Comment, Tag, UserProfile
 
@@ -7,7 +7,7 @@ from .models import Blog, Comment, Tag, UserProfile
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = "__all__"
+        fields = ["id", "username", "email", "date_joined"]
 
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
@@ -32,7 +32,6 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             email=validated_data["email"],
             password=validated_data["password"]
         )
-        
         return user
 
 
@@ -70,8 +69,6 @@ class BlogSerializer(serializers.ModelSerializer):
         many=True,
         required=False
     )
-
-    # tags = TagSerializer(many=True, read_only=True)
 
     class Meta:
         model = Blog

@@ -75,17 +75,8 @@ class CurrentUser(generics.RetrieveAPIView):
     authentication_classes = [authentication.JWTAuthentication]
 
     def get_object(self):
-        return self.request.user
-
-
-class SingleUser(generics.RetrieveAPIView):
-    queryset = UserProfile.objects.all()
-    serializer_class = UserProfileSerializer
-
-    def get_object(self):
-        user_id = self.kwargs.get("user_id")
-        return get_object_or_404(UserProfile, user__id=user_id)
-
+        user = self.request.user
+        return get_object_or_404(UserProfile, user__id=user.id)
 
 
 class CookieTokenObtainPairView(TokenObtainPairView):
