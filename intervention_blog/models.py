@@ -14,7 +14,7 @@ class Tag(models.Model):
 
 class UserProfile(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
-    user = models.OneToOneField(User, on_delete=models.CASCADE, default="", related_name="profile")
+    user = models.OneToOneField(User, on_delete=models.CASCADE, default="")
     is_author = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now=True, editable=False)
     

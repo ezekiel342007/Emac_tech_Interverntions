@@ -1,15 +1,14 @@
 from datetime import datetime, timedelta, timezone
-from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import mixins, status
 from rest_framework.request import Request 
-from rest_framework.pagination import LimitOffsetPagination
-from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
+from rest_framework.pagination import LimitOffsetPagination
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.status import HTTP_201_CREATED
 from rest_framework_simplejwt import authentication
-from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from rest_framework_simplejwt.exceptions import InvalidToken
 from rest_framework import generics
 
 from intervention_blog.filters import BlogFilter
@@ -85,16 +84,26 @@ class CookieTokenObtainPairView(TokenObtainPairView):
 
         if response.status_code == 200:
             refresh_token = response.data.get("refresh")
+            response.data.pop("refresh")
 
             response.set_cookie(
                 key="refresh_token",
                 value=refresh_token,
+                path="/api/",
                 httponly=True,
-                secure=True,
+                secure=False,
                 samesite="Lax",
                 expires=datetime.now(timezone.utc) + timedelta(days=7)
             )
-
-            response.data.pop("refresh")
-
         return response
+
+
+class CookieTokenRefreshView(TokenRefreshView):
+    def post(self, request, *args, **kwargs):
+        refresh_token = request.COOKIES.get("refresh_token")
+
+        if not refresh_token:
+            raise InvalidToken("Refresh token not found in cookies")
+
+        request.data["refresh"] = refresh_token
+        return super().post(request, *args, **kwargs)

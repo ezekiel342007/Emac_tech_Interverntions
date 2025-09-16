@@ -76,7 +76,7 @@ class BlogSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data) -> Blog:
         user_instance = validated_data.pop("author_id")
-        author_profile = user_instance.profile
+        author_profile = UserProfile.objects.get(user=user_instance)
         tags_data = validated_data.pop("tags", [])
         blog = Blog.objects.create(author=author_profile, **validated_data)
         blog.tags.set(tags_data)
