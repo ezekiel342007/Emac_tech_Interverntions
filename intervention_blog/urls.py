@@ -7,6 +7,4 @@ urlpatterns = [
     path("blogs/latest/", view=views.LatestBlog.as_view()),
     path("blogs/trending/", view=views.TrendingBlog.as_view()),
     path("blogs/<str:pk>/", view=views.SingleBlog.as_view()),
-    path("register/", view=views.Users.as_view()),
-    path("users/current_user/", view=views.CurrentUser.as_view()),
 ]
