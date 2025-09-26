@@ -1,15 +1,14 @@
 from rest_framework.pagination import LimitOffsetPagination
-from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework_simplejwt import authentication
 from rest_framework import generics
 
-from intervention_blog.filters import BlogFilter
 
 from .serializers import BlogSerializer, TagSerializer
 from .models import Blog, Tag
 
 # Create your views here.
+
 
 class GetAllTags(generics.ListAPIView):
     queryset = Tag.objects.all()
@@ -18,11 +17,8 @@ class GetAllTags(generics.ListAPIView):
 
 class Blogs(generics.ListCreateAPIView):
     queryset = Blog.objects.all()
-    filterset_classes = BlogFilter
     serializer_class = BlogSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
-    filter_backends = (DjangoFilterBackend,)
-    authentication_classes = [authentication.JWTAuthentication]
     pagination_class = LimitOffsetPagination
 
 

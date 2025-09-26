@@ -5,6 +5,7 @@ from users.models import CustomUser
 
 # Create your models here.
 
+
 class Tag(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     name = models.CharField(max_length=20)
@@ -20,7 +21,9 @@ class Blog(models.Model):
     tags = models.ManyToManyField(Tag, related_name="blogs_with_tag")
     image_url = models.URLField(blank=True, null=True)
     body = models.TextField()
-    author = models.ForeignKey(CustomUser, null=True, on_delete=models.SET_NULL, related_name="blogs")
+    author = models.ForeignKey(
+        CustomUser, null=True, on_delete=models.SET_NULL, related_name="blogs"
+    )
     likes = models.PositiveIntegerField(null=True, blank=True, default=0)
     dislikes = models.PositiveIntegerField(null=True, blank=True, default=0)
     posted_on = models.DateTimeField(auto_now=True, editable=False)
@@ -39,7 +42,7 @@ class Blog(models.Model):
 
     def remove_like(self):
         self.likes -= 1
-        
+
     def add_dislikes(self):
         self.dislikes += 1
 
@@ -47,12 +50,13 @@ class Blog(models.Model):
         self.dislikes -= 1
 
 
-
 class Comment(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
-    writer = models.ForeignKey(CustomUser, null=True, on_delete=models.SET_NULL)
+    writer = models.ForeignKey(
+        CustomUser, null=True, on_delete=models.SET_NULL)
     body = models.TextField()
-    blog = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name="comments")
+    blog = models.ForeignKey(
+        Blog, on_delete=models.CASCADE, related_name="comments")
     made_on = models.DateTimeField(auto_now=True, editable=False)
 
     def __str__(self):
@@ -61,8 +65,12 @@ class Comment(models.Model):
 
 class Watchings(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
-    watcher = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="watchers")
-    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="authors")
+    watcher = models.ForeignKey(
+        CustomUser, on_delete=models.CASCADE, related_name="watchers"
+    )
+    author = models.ForeignKey(
+        CustomUser, on_delete=models.CASCADE, related_name="authors"
+    )
     joined_watch_on = models.DateTimeField(auto_now=True)
 
     def __str__(self):

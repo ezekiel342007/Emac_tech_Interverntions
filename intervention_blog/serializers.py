@@ -5,6 +5,7 @@ from users.serializers import CustomUserSerializer
 
 from .models import Blog, Comment, Tag
 
+
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
@@ -15,15 +16,12 @@ class BlogSerializer(serializers.ModelSerializer):
     author = CustomUserSerializer(read_only=True)
     author_id = serializers.HiddenField(
         default=serializers.CreateOnlyDefault(
-            serializers.CurrentUserDefault()
-        ),
-        write_only=True
+            serializers.CurrentUserDefault()),
+        write_only=True,
     )
 
     tags = serializers.PrimaryKeyRelatedField(
-        queryset=Tag.objects.all(),
-        many=True,
-        required=False
+        queryset=Tag.objects.all(), many=True, required=False
     )
 
     class Meta:
@@ -31,8 +29,8 @@ class BlogSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
     def create(self, validated_data) -> Blog:
-        user_instance = validated_data.pop("author_id")
-        author_profile = CustomUser.objects.get(user=user_instance)
+        user_email = validated_data.pop("author_id")
+        author_profile = CustomUser.objects.get(email=user_email)
         tags_data = validated_data.pop("tags", [])
         blog = Blog.objects.create(author=author_profile, **validated_data)
         blog.tags.set(tags_data)
@@ -53,4 +51,3 @@ class CommentSeralizer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = "__all__"
-
