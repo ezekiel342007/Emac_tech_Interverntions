@@ -4,7 +4,7 @@ from rest_framework_simplejwt import authentication
 from rest_framework import generics
 
 
-from .serializers import BlogSerializer, TagSerializer
+from .serializers import BlogSerializer, TagSerializer, CommentSeralizer
 from .models import Blog, Tag
 
 # Create your views here.
@@ -40,3 +40,8 @@ class SingleBlog(generics.RetrieveUpdateDestroyAPIView):
     lookup_field = "pk"
     permission_classes = [IsAuthenticatedOrReadOnly]
     authentication_classes = [authentication.JWTAuthentication]
+
+
+class Comments(generics.ListCreateAPIView):
+    serializer_class = CommentSeralizer
+    permission_classes = (IsAuthenticatedOrReadOnly,)

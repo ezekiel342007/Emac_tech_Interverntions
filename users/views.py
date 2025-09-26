@@ -47,22 +47,15 @@ class LoginView(APIView):
                 value=acces_token,
                 httponly=True,
                 secure=False,
-                samesite="Lax",
+                samesite="None",
             )
 
-            response.set_cookie(
-                key="Test",
-                value="testcookie",
-                httponly=False,
-                secure=False,
-                samesite="Lax",
-            )
             response.set_cookie(
                 key="refresh_token",
                 value=str(refresh),
                 httponly=True,
                 secure=False,
-                samesite="Lax",
+                samesite="None",
             )
 
             return response
