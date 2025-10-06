@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     "django_filters",
     "rest_framework",
     "intervention_blog",
-    'rest_framework_simplejwt.token_blacklist',
+    "rest_framework_simplejwt.token_blacklist",
     "rest_framework_simplejwt",
 ]
 
@@ -81,10 +81,27 @@ WSGI_APPLICATION = "emac_tech_interventions.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+#
+# }
+
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "intervention_blog",  # The name of the database you created
+        "USER": "emac",  # The MySQL username
+        "PASSWORD": "His.presence1",  # The MySQL password
+        "HOST": "localhost",  # Set to your MySQL server's host
+        # Set to your MySQL server's port (default is 3306)
+        "PORT": "3306",
+        # Optional: Add extra parameters if needed
+        # 'OPTIONS': {
+        #     'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        # }
     }
 }
 
@@ -148,7 +165,5 @@ AUTH_USER_MODEL = "users.CustomUser"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'users.authentication.CookieJWTAuthentication',
-    )
+    "DEFAULT_AUTHENTICATION_CLASSES": ("users.authentication.CookieJWTAuthentication",)
 }
