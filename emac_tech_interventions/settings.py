@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-f9fi+)3bdz)z0y=2wb!4!zffi(t&w@&#wt(r9v@hez=uvfu#t_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["792621cb028c.ngrok-free.app", "c3fa8de9fc25.ngrok-free.app"]
 
 
 # Application definition
@@ -91,17 +91,12 @@ WSGI_APPLICATION = "emac_tech_interventions.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": "intervention_blog",  # The name of the database you created
-        "USER": "emac",  # The MySQL username
-        "PASSWORD": "His.presence1",  # The MySQL password
-        "HOST": "localhost",  # Set to your MySQL server's host
-        # Set to your MySQL server's port (default is 3306)
-        "PORT": "3306",
-        # Optional: Add extra parameters if needed
-        # 'OPTIONS': {
-        #     'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
-        # }
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "intervention_blog_db",  # The name of the database you created
+        "USER": "emac342007",  # The Postgresql username
+        "PASSWORD": "OFD0N0U0krRu40RVN5t32Pw26j6jUZZV",  # The Postgresql password
+        "HOST": "ehbrs0-a.oregon-postgres.render.com",
+        "PORT": "5432",
     }
 }
 
@@ -137,8 +132,13 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "https://c3fa8de9fc25.ngrok-free.app",
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://c3fa8de9fc25.ngrok-free.app",
+    # Add other trusted domains if necessary
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
