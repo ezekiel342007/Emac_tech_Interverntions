@@ -1,4 +1,8 @@
-from rest_framework.generics import CreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import (
+    CreateAPIView,
+    ListCreateAPIView,
+    RetrieveUpdateDestroyAPIView,
+)
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenRefreshView
@@ -11,9 +15,21 @@ from .serializers import (
     CustomUserSerializer,
     LoginUserSerializer,
     RegisterUserSerializer,
+    WatchingSerializer,
 )
 
+from .models import Watchings
+
 # Create your views here.
+
+
+class UserWatchings(ListCreateAPIView, RetrieveUpdateDestroyAPIView):
+    serializer_class = WatchingSerializer
+    permission_classes = (IsAuthenticated,)
+    lookup_field = "pk"
+
+    def get_queryset(self):
+        return Watchings.objects.get(watcher=self.request.user)
 
 
 class UserInfo(RetrieveUpdateDestroyAPIView):

@@ -52,26 +52,10 @@ class Blog(models.Model):
 
 class Comment(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
-    writer = models.ForeignKey(
-        CustomUser, null=True, on_delete=models.SET_NULL)
+    writer = models.ForeignKey(CustomUser, null=True, on_delete=models.SET_NULL)
     body = models.TextField()
-    blog = models.ForeignKey(
-        Blog, on_delete=models.CASCADE, related_name="comments")
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name="comments")
     made_on = models.DateTimeField(auto_now=True, editable=False)
 
     def __str__(self):
         return self.body[0:50]
-
-
-class Watchings(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
-    watcher = models.ForeignKey(
-        CustomUser, on_delete=models.CASCADE, related_name="watchers"
-    )
-    author = models.ForeignKey(
-        CustomUser, on_delete=models.CASCADE, related_name="authors"
-    )
-    joined_watch_on = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return f"{self.watcher} joined watch on {self.author}"

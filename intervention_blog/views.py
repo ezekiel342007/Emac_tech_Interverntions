@@ -4,7 +4,11 @@ from rest_framework_simplejwt import authentication
 from rest_framework import generics
 
 
-from .serializers import BlogSerializer, TagSerializer, CommentSeralizer
+from .serializers import (
+    BlogSerializer,
+    TagSerializer,
+    CommentSeralizer,
+)
 from .models import Blog, Tag
 
 # Create your views here.

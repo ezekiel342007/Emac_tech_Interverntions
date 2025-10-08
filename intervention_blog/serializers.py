@@ -3,7 +3,7 @@ from rest_framework import serializers
 from users.models import CustomUser
 from users.serializers import CustomUserSerializer
 
-from .models import Blog, Comment, Tag, Watchings
+from .models import Blog, Comment, Tag
 
 
 class TagSerializer(serializers.ModelSerializer):
@@ -67,22 +67,3 @@ class CommentSeralizer(serializers.ModelSerializer):
             blog=selected_blog, writer=commenter, **validated_data
         )
         return comment
-
-
-class WatchingSerializer(serializers.ModelSerializer):
-    user = serializers.HiddenField(
-        default=serializers.CreateOnlyDefault(serializers.CurrentUserDefault()
-                                              ),
-        write_only=True,
-    )
-
-    class Meta:
-        model = Watchings
-        fields = "__all__"
-
-    def create(self, validated_data) -> Watchings:
-        watcher = CustomUser.objects.get(email=validated_data.pop("user"))
-        author = CustomUser.objects.get(email=validated_data.pop("author"))
-        return Watchings.objects.create(
-            watcher=watcher, author=author, **validated_data
-        )

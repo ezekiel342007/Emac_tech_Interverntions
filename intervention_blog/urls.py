@@ -8,4 +8,5 @@ urlpatterns = [
     path("blogs/trending/", view=views.TrendingBlog.as_view()),
     path("blogs/<str:pk>/", view=views.SingleBlog.as_view()),
     path("blogs/<str:pk>/comments/", view=views.Comments.as_view()),
+    path("blogs/<str:pk>/comments/", view=views.Comments.as_view()),
 ]
