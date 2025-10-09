@@ -26,8 +26,7 @@ SECRET_KEY = "django-insecure-f9fi+)3bdz)z0y=2wb!4!zffi(t&w@&#wt(r9v@hez=uvfu#t_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["emac-tech-interverntions.onrender.com",
-                 "c3fa8de9fc25.ngrok-free.app"]
+ALLOWED_HOSTS = ["emac-tech-interverntions.onrender.com", "c3fa8de9fc25.ngrok-free.app"]
 
 
 # Application definition
@@ -133,11 +132,10 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
-    "https://c3fa8de9fc25.ngrok-free.app",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://c3fa8de9fc25.ngrok-free.app",
+    "https://emac-tech-interverntions.onrender.com",
     # Add other trusted domains if necessary
 ]
 
