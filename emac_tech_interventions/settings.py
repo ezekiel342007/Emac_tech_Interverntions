@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 from datetime import timedelta
 
@@ -99,6 +100,14 @@ DATABASES = {
         "PORT": "5432",
     }
 }
+
+
+STATIC_URL = "static/"
+
+# The directory where collectstatic will place all static files for production serving.
+# This should be outside of your version control (not tracked by Git).
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+# STATIC_ROOT = BASE_DIR / 'staticfiles' # If using modern Pathlib setup
 
 
 # Password validation
