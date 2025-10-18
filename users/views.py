@@ -62,7 +62,7 @@ class LoginView(APIView):
                 key="access_token",
                 value=acces_token,
                 httponly=True,
-                secure=False,
+                secure=True,
                 samesite="None",
             )
 
@@ -70,7 +70,7 @@ class LoginView(APIView):
                 key="refresh_token",
                 value=str(refresh),
                 httponly=True,
-                secure=False,
+                secure=True,
                 samesite="None",
             )
 
