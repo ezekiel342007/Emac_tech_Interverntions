@@ -3,7 +3,7 @@ from rest_framework.generics import (
     ListCreateAPIView,
     RetrieveUpdateDestroyAPIView,
 )
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenRefreshView
 from rest_framework.views import APIView
@@ -45,6 +45,8 @@ class UserRegistrationView(CreateAPIView):
 
 
 class LoginView(APIView):
+    permission_classes = (AllowAny,)
+
     def post(self, request):
         serializer = LoginUserSerializer(data=request.data)
 
