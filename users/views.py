@@ -66,6 +66,7 @@ class LoginView(APIView):
                 httponly=True,
                 secure=True,
                 samesite="None",
+                partitioned=True,
             )
 
             response.set_cookie(
@@ -74,6 +75,7 @@ class LoginView(APIView):
                 httponly=True,
                 secure=True,
                 samesite="None",
+                partitioned=True,
             )
 
             return response
