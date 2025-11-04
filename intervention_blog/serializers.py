@@ -15,8 +15,7 @@ class TagSerializer(serializers.ModelSerializer):
 class BlogSerializer(serializers.ModelSerializer):
     author = CustomUserSerializer(read_only=True)
     author_id = serializers.HiddenField(
-        default=serializers.CreateOnlyDefault(
-            serializers.CurrentUserDefault()),
+        default=serializers.CreateOnlyDefault(serializers.CurrentUserDefault()),
         write_only=True,
     )
 
@@ -49,8 +48,7 @@ class BlogSerializer(serializers.ModelSerializer):
 
 class CommentSeralizer(serializers.ModelSerializer):
     author_id = serializers.HiddenField(
-        default=serializers.CreateOnlyDefault(
-            serializers.CurrentUserDefault()),
+        default=serializers.CreateOnlyDefault(serializers.CurrentUserDefault()),
         write_only=True,
     )
 
@@ -60,8 +58,7 @@ class CommentSeralizer(serializers.ModelSerializer):
 
     def create(self, validated_data) -> Comment:
         selected_blog = Blog.objects.get(title=validated_data.pop("blog"))
-        commenter = CustomUser.objects.get(
-            email=validated_data.pop("author_id"))
+        commenter = CustomUser.objects.get(email=validated_data.pop("author_id"))
 
         comment = Comment.objects.create(
             blog=selected_blog, writer=commenter, **validated_data
