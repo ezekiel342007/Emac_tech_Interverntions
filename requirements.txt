@@ -18,3 +18,4 @@ sqlparse==0.5.3
 types-PyYAML==6.0.12.20250516
 typing_extensions==4.14.1
 gunicorn==23.0.0
+whitenoise==6.11.0 

@@ -27,8 +27,7 @@ SECRET_KEY = "django-insecure-f9fi+)3bdz)z0y=2wb!4!zffi(t&w@&#wt(r9v@hez=uvfu#t_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["emac-tech-interverntions.onrender.com",
-                 "c3fa8de9fc25.ngrok-free.app"]
+ALLOWED_HOSTS = ["emac-tech-interverntions.onrender.com", "c3fa8de9fc25.ngrok-free.app"]
 
 
 # Application definition
@@ -58,6 +57,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "corsheaders.middleware.CorsMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = "emac_tech_interventions.urls"
@@ -110,6 +110,10 @@ STATIC_URL = "static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 # STATIC_ROOT = BASE_DIR / 'staticfiles' # If using modern Pathlib setup
 
+# Tell WhiteNoise to use the compressed storage backend
+# Note: For Django 4.2+, use the STORAGES setting (see note below).
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -143,7 +147,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
     "https://emac-intervention-blog.vercel.app",
-    "https://emac-intervention-blog-6vdvin8hj-emac342007s-projects.vercel.app"
+    "https://emac-intervention-blog-6vdvin8hj-emac342007s-projects.vercel.app",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
