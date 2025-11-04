@@ -29,6 +29,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["emac-tech-interverntions.onrender.com", "c3fa8de9fc25.ngrok-free.app"]
 
+USE_TZ = True
+
+TIME_ZONE = "UTC"
+
 
 # Application definition
 
@@ -139,6 +143,7 @@ SIMPLE_JWT = {
     "ROTATE_REFRESH_TOKENS": False,
     "BLACKLIST_AFTER_ROTATION": False,
     "UPDATE_LAST_LOGIN": False,
+    "LEEWAY": timedelta(seconds=60),
 }
 
 CORS_ALLOW_CREDENTIALS = True
