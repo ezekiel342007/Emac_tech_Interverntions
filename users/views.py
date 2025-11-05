@@ -45,6 +45,7 @@ class UserRegistrationView(CreateAPIView):
 
 
 class LoginView(APIView):
+    authentication_classes = ()
     permission_classes = (AllowAny,)
 
     def post(self, request):
@@ -104,8 +105,11 @@ class LogoutView(APIView):
 
 
 class CookieTokenRefreshView(TokenRefreshView):
+    authentication_classes = ()
+
     def post(self, request):
         refresh_token = request.COOKIES.get("refresh_token")
+        request.COOKIES.delete_cookie
         if not refresh_token:
             return Response(
                 {"error": "Refresh token not provided"},
