@@ -16,5 +16,7 @@ python manage.py collectstatic --no-input
 # This uses the environment variables set in the Render dashboard.
 if [ "$CREATE_SUPERUSER_FLAG" = "True" ]; then
     echo "Creating superuser..."
-    # python manage.py createsuperuser --no-input
+    python manage.py createsuperuser --no-input
 fi
+
+echo "Build process complete"

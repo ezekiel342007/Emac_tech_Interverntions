@@ -27,7 +27,8 @@ SECRET_KEY = "django-insecure-f9fi+)3bdz)z0y=2wb!4!zffi(t&w@&#wt(r9v@hez=uvfu#t_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["emac-tech-interverntions.onrender.com", "c3fa8de9fc25.ngrok-free.app"]
+ALLOWED_HOSTS = ["emac-tech-interverntions.onrender.com",
+                 "c3fa8de9fc25.ngrok-free.app"]
 
 USE_TZ = True
 
@@ -87,25 +88,25 @@ WSGI_APPLICATION = "emac_tech_interventions.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-#
-# }
-
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "intervention_blog_db",  # The name of the database you created
-        "USER": "emac342007",  # The Postgresql username
-        "PASSWORD": "OFD0N0U0krRu40RVN5t32Pw26j6jUZZV",  # The Postgresql password
-        "HOST": "ehbrs0-a.oregon-postgres.render.com",
-        "PORT": "5432",
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
+
 }
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "intervention_blog_db",  # The name of the database you created
+#         "USER": "emac342007",  # The Postgresql username
+#         "PASSWORD": "OFD0N0U0krRu40RVN5t32Pw26j6jUZZV",  # The Postgresql password
+#         "HOST": "ehbrs0-a.oregon-postgres.render.com",
+#         "PORT": "5432",
+#     }
+# }
+#
 
 STATIC_URL = "static/"
 
