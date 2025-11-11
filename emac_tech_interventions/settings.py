@@ -152,7 +152,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
     "https://emac-intervention-blog.vercel.app",
     "https://emac-intervention-blog-6vdvin8hj-emac342007s-projects.vercel.app",
-    "https://emac-intervention-blog-git-goodbuild-emac342007s-projects.vercel.app/",
+    "https://emac-intervention-blog-git-goodbuild-emac342007s-projects.vercel.app",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
