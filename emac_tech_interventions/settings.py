@@ -27,8 +27,7 @@ SECRET_KEY = "django-insecure-f9fi+)3bdz)z0y=2wb!4!zffi(t&w@&#wt(r9v@hez=uvfu#t_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["emac-tech-interverntions.onrender.com",
-                 "c3fa8de9fc25.ngrok-free.app"]
+ALLOWED_HOSTS = ["emac-tech-interverntions.onrender.com", "c3fa8de9fc25.ngrok-free.app"]
 
 USE_TZ = True
 
@@ -93,7 +92,6 @@ DATABASES = {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
     }
-
 }
 
 # DATABASES = {
@@ -154,6 +152,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
     "https://emac-intervention-blog.vercel.app",
     "https://emac-intervention-blog-6vdvin8hj-emac342007s-projects.vercel.app",
+    "https://emac-intervention-blog-git-goodbuild-emac342007s-projects.vercel.app/",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
